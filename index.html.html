@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경제 기초용어 50 | 별탱의 경제이야기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --bg:#FBF8FF;
+    --surface:#FFFFFF;
+    --ink:#2B2640;
+    --muted:#6E6785;
+    --line:#E7E1F7;
+
+    --lavender:#8F7BF0;
+    --lavender-soft:#EEE8FE;
+    --mint:#2FB893;
+    --mint-soft:#E1FBF3;
+    --pink:#E85D9A;
+    --pink-soft:#FDE8F1;
+    --peach:#E08A3C;
+    --peach-soft:#FFEEDD;
+    --sky:#2E9FD6;
+    --sky-soft:#E4F5FD;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard', -apple-system, 'Noto Sans KR', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px;}
+
+  /* Hero */
+  header.hero{padding:64px 20px 40px;text-align:center;}
+  header.hero .eyebrow{
+    font-size:15px;color:var(--lavender);font-weight:600;margin-bottom:10px;
+  }
+  header.hero h1{
+    font-size:clamp(28px,5vw,42px);
+    font-weight:800;
+    margin:0 0 14px;
+    letter-spacing:-0.02em;
+  }
+  header.hero p{
+    color:var(--muted);
+    font-size:16px;
+    max-width:520px;
+    margin:0 auto 28px;
+  }
+
+  .search-box{
+    max-width:440px;margin:0 auto;position:relative;
+  }
+  .search-box input{
+    width:100%;
+    padding:14px 18px 14px 44px;
+    border-radius:14px;
+    border:1.5px solid var(--line);
+    background:var(--surface);
+    font-size:15px;
+    font-family:inherit;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--lavender);}
+  .search-box svg{
+    position:absolute;left:15px;top:50%;transform:translateY(-50%);
+    width:18px;height:18px;stroke:var(--muted);
+  }
+
+  /* Filter chips */
+  .filters{
+    position:sticky;top:0;z-index:10;
+    background:var(--bg);
+    padding:16px 20px;
+    display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .chip{
+    padding:8px 16px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    background:var(--surface);
+    font-size:14px;
+    font-weight:600;
+    color:var(--muted);
+    cursor:pointer;
+    transition:all .15s ease;
+    font-family:inherit;
+  }
+  .chip:hover{border-color:var(--lavender);}
+  .chip.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  /* Sections */
+  main{padding:36px 0 20px;}
+  .cat-section{margin-bottom:44px;}
+  .cat-section h2{
+    font-size:20px;
+    font-weight:800;
+    margin:0 0 4px;
+    padding-left:2px;
+  }
+  .cat-section .count{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:18px;
+    padding-left:2px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr;}
+  }
+
+  /* Card */
+  .card{
+    background:var(--surface);
+    border:1.5px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+  }
+  .card .term{
+    font-size:18px;
+    font-weight:800;
+    margin:0 0 6px;
+  }
+  .card .def{
+    color:var(--muted);
+    font-size:14.5px;
+    margin:0 0 16px;
+  }
+
+  .news-clip{
+    border:1.5px dashed var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:12px;
+    font-size:13.5px;
+    color:var(--ink);
+    background:rgba(0,0,0,0.012);
+  }
+  .news-clip .tag{
+    display:block;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .news-clip .quote{font-style:italic;}
+
+  .explain-wrap{
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .explain-summary{
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 14px;
+    list-style:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .explain-summary::-webkit-details-marker{display:none;}
+  .explain-summary::marker{content:"";}
+  .explain-summary .tag{
+    font-size:11.5px;
+    font-weight:700;
+  }
+  .explain-summary .hint{
+    font-size:12px;
+    font-weight:500;
+    color:var(--muted);
+  }
+  .explain-summary .chev{
+    margin-left:auto;
+    width:15px;height:15px;
+    stroke:var(--muted);
+    transition:transform .18s ease;
+    flex-shrink:0;
+  }
+  .explain-wrap[open] .chev{transform:rotate(180deg);}
+  .explain-wrap[open] .explain-summary .hint{display:none;}
+  .explain-body{
+    padding:0 14px 14px;
+    font-size:14px;
+  }
+
+  /* category accent variants */
+  .cat-0 .term{color:var(--lavender);}
+  .cat-0 .explain-wrap{background:var(--lavender-soft);}
+  .cat-0 .explain-summary .tag{color:var(--lavender);}
+
+  .cat-1 .term{color:var(--mint);}
+  .cat-1 .explain-wrap{background:var(--mint-soft);}
+  .cat-1 .explain-summary .tag{color:var(--mint);}
+
+  .cat-2 .term{color:var(--pink);}
+  .cat-2 .explain-wrap{background:var(--pink-soft);}
+  .cat-2 .explain-summary .tag{color:var(--pink);}
+
+  .cat-3 .term{color:var(--peach);}
+  .cat-3 .explain-wrap{background:var(--peach-soft);}
+  .cat-3 .explain-summary .tag{color:var(--peach);}
+
+  .cat-4 .term{color:var(--sky);}
+  .cat-4 .explain-wrap{background:var(--sky-soft);}
+  .cat-4 .explain-summary .tag{color:var(--sky);}
+
+  .empty{
+    text-align:center;
+    color:var(--muted);
+    padding:60px 20px 70px;
+    font-size:15px;
+  }
+  .empty .headline{
+    color:var(--ink);
+    font-size:17px;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .empty a{
+    display:inline-block;
+    margin-top:16px;
+    padding:10px 20px;
+    border-radius:999px;
+    background:var(--lavender);
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+  }
+
+  footer{
+    text-align:center;
+    padding:48px 20px 60px;
+    color:var(--muted);
+    font-size:13px;
+    border-top:1px solid var(--line);
+    margin-top:20px;
+  }
+  footer .handle{
+    display:inline-block;
+    color:var(--ink);
+    font-weight:700;
+    margin-bottom:6px;
+    text-decoration:none;
+    border-bottom:1.5px solid var(--line);
+    padding-bottom:2px;
+  }
+  footer .handle:hover{border-color:var(--lavender);color:var(--lavender);}
+  footer a{color:var(--lavender);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">별탱의 경제이야기</div>
+  <h1>경제 기초용어 50</h1>
+  <p>뉴스에서 자주 보는데 뜻은 몰랐던 그 용어들, 예문이랑 같이 쉽게 풀어봤어</p>
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="searchInput" type="text" placeholder="궁금한 용어를 검색해보세요">
+  </div>
+</header>
+
+<nav class="filters" id="filters"></nav>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <a class="handle" href="https://www.instagram.com/taengstar_/" target="_blank" rel="noopener">@taengstar_</a>
+  <p>이 자료는 경제 개념 이해를 돕기 위한 정보 공유 목적이며 투자 권유가 아니에요.<br>판단과 책임은 본인에게 있어요.</p>
+</footer>
+
+<script>
+const CATEGORIES = ["물가·금리","계좌·세금","투자상품 기초","시장·지표","경제 뉴스 자주 나오는 용어"];
+
+const TERMS = [
+  {c:0,t:"인플레이션",d:"물가가 전반적으로 계속 오르는 현상",ex:"지난달 소비자물가가 3%대로 올라서며 인플레이션 우려가 커지고 있다.",ep:"물건값이 예전보다 빠르게 오르고 있다는 뜻. 3%대라는 건 1년 전과 비교했을 때 평균적으로 물건값이 3% 정도 비싸졌다는 얘기야."},
+  {c:0,t:"디플레이션",d:"물가가 지속적으로 하락하는 현상, 소비 위축·경기 침체를 동반하는 경우가 많음",ex:"장기 디플레이션에 빠진 일본은 20년 넘게 저물가에 시달렸다.",ep:"일본은 물가가 안 오르거나 오히려 떨어지는 상태가 20년 넘게 이어졌다는 뜻. 얼핏 좋아 보이지만 실제론 소비·투자가 위축돼서 경제가 활력을 잃었다는 의미로 쓰인 거야."},
+  {c:0,t:"스태그플레이션",d:"경기침체와 물가상승이 동시에 나타나는 현상",ex:"유가 급등이 겹치며 시장에서는 스태그플레이션 우려가 다시 고개를 들고 있다.",ep:"기름값이 갑자기 뛰면서 경기는 나빠질 것 같은데 물가는 오히려 오를 것 같다는 걱정이 커지고 있다는 뜻이야."},
+  {c:0,t:"기준금리",d:"한국은행이 정하는 정책금리, 시중 금리의 기준",ex:"한국은행이 기준금리를 연 2.50%로 동결했다.",ep:"한국은행이 금리를 올리지도 내리지도 않고 그대로 유지하기로 했다는 뜻. 이 금리가 은행 예금·대출 금리의 기준점이 돼."},
+  {c:0,t:"콜금리",d:"금융기관끼리 초단기(보통 익일)로 주고받는 금리",ex:"콜금리가 급등하면서 단기 자금시장이 경색됐다.",ep:"은행들끼리 잠깐씩 돈을 빌려주고 받는 금리가 갑자기 뛰면서, 금융회사들이 단기로 돈 구하기가 어려워졌다는 뜻이야."},
+  {c:0,t:"기축통화",d:"국제 거래의 기준이 되는 통화(대표적으로 달러)",ex:"달러가 기축통화 지위를 유지하는 한 미국의 금리 정책은 전 세계에 영향을 미친다.",ep:"전 세계 거래에서 달러가 표준으로 쓰이기 때문에, 미국이 금리를 올리거나 내리면 다른 나라 경제에도 파장이 미친다는 뜻이야."},
+  {c:0,t:"환율",d:"한 나라 통화와 다른 나라 통화의 교환 비율",ex:"원달러 환율이 1,400원을 넘어서며 수입 물가 부담이 커졌다.",ep:"1달러를 바꾸는 데 1,400원 넘게 필요해졌다는 뜻. 원화 가치가 떨어진 거라, 해외에서 물건 사올 때 더 비싸져서 수입 물가가 오르는 거야."},
+  {c:0,t:"원자재 가격",d:"원유·구리·곡물 등 생산의 기초가 되는 재료 가격",ex:"국제 원자재 가격 상승이 제조업체 원가 부담으로 이어지고 있다.",ep:"원유·철광석 같은 원료 값이 오르면서, 물건 만드는 회사들의 생산비가 늘고 있다는 뜻이야."},
+
+  {c:1,t:"ISA",d:"예금·펀드·주식을 한 계좌에서 굴리며 세제 혜택을 받는 통합계좌",ex:"ISA 계좌를 활용하면 이자·배당소득 세금을 아낄 수 있다.",ep:"ISA 안에 넣어둔 돈으로 번 이자나 배당금은 세금을 덜 내거나 나중에 낼 수 있게 해준다는 뜻이야."},
+  {c:1,t:"연금저축",d:"노후자금 마련용, 납입하면 세액공제 혜택",ex:"연말정산 시즌을 맞아 연금저축 추가 납입 문의가 늘고 있다.",ep:"연말정산에서 세금을 돌려받으려고 연금저축에 돈을 더 넣으려는 사람이 늘었다는 뜻이야."},
+  {c:1,t:"IRP",d:"퇴직금·개인자금을 굴려 노후자금으로 쌓는 계좌",ex:"IRP는 연금저축과 합쳐 세액공제 한도를 늘릴 수 있다.",ep:"연금저축만 넣을 때보다 IRP까지 같이 활용하면, 세금 혜택 받을 수 있는 한도가 더 커진다는 뜻이야."},
+  {c:1,t:"청약통장",d:"주택 청약 자격을 얻기 위한 저축상품",ex:"청약통장 가입자 수가 감소세로 돌아섰다.",ep:"집 살 때 필요한 청약통장을 새로 만드는 사람이 줄고 있다는 뜻이야."},
+  {c:1,t:"배당소득세",d:"주식 배당금 등에 부과되는 세금",ex:"배당소득세 부담을 줄이려 ISA나 연금계좌를 활용하는 투자자가 늘고 있다.",ep:"배당금 받을 때 떼이는 세금이 아까워서, 세제 혜택 있는 계좌로 옮겨서 투자하려는 사람이 늘었다는 뜻이야."},
+  {c:1,t:"양도소득세",d:"자산을 팔아 얻은 차익에 부과되는 세금",ex:"해외주식은 양도소득세가 적용돼 매매차익 일부를 세금으로 낸다.",ep:"해외 주식을 팔아서 이익을 봤다면, 그 이익의 일부를 세금으로 내야 한다는 뜻이야."},
+  {c:1,t:"과세이연",d:"세금 납부 시점을 뒤로 미뤄주는 제도",ex:"퇴직연금의 과세이연 효과로 장기 투자자는 세부담을 늦출 수 있다.",ep:"지금 당장 세금을 내는 게 아니라, 나중에 연금으로 찾을 때 내도록 미뤄준다는 뜻이야. 그만큼 그 돈을 더 오래 굴릴 수 있어."},
+  {c:1,t:"비과세",d:"세금을 아예 부과하지 않는 것",ex:"요건을 충족한 장기 저축성 보험은 비과세 혜택을 받을 수 있다.",ep:"일정 조건(가입기간 등)을 채우면 이자나 수익에 대해 세금을 아예 안 낸다는 뜻이야."},
+  {c:1,t:"원천징수",d:"소득 지급자가 세금을 미리 떼고 지급하는 방식",ex:"이자소득은 은행이 원천징수한 뒤 나머지 금액을 입금해준다.",ep:"은행이 이자를 줄 때 세금만큼을 미리 빼고, 나머지 금액만 통장에 넣어준다는 뜻이야."},
+  {c:1,t:"종합소득세",d:"여러 소득을 합산해 매기는 세금",ex:"금융소득이 연 2천만원을 넘으면 종합소득세 신고 대상이 될 수 있다.",ep:"이자·배당 같은 금융소득이 1년에 2천만원을 넘으면, 다른 소득이랑 합쳐서 세금을 따로 신고해야 할 수 있다는 뜻이야."},
+
+  {c:2,t:"ETF",d:"특정 지수·자산군을 추종해 거래소에서 주식처럼 사고파는 펀드",ex:"코스피200을 추종하는 ETF에 자금이 몰리고 있다.",ep:"코스피 대표 200개 종목을 한 번에 담은 상품에 돈이 많이 들어오고 있다는 뜻이야. 종목 하나하나 안 골라도 지수 전체에 투자하는 효과가 있어."},
+  {c:2,t:"펀드",d:"여러 투자자 돈을 모아 전문가가 대신 운용",ex:"액티브 펀드보다 인덱스 펀드로 자금이 옮겨가는 흐름이 뚜렷하다.",ep:"전문가가 종목을 골라주는 펀드보다, 지수를 그대로 따라가는 펀드로 돈이 옮겨가고 있다는 뜻이야."},
+  {c:2,t:"액티브 vs 패시브",d:"종목 선별로 시장을 이기려는 전략 vs 지수를 그대로 따라가는 전략",ex:"장기 성과에서는 액티브 펀드가 패시브를 이기기 어렵다는 연구가 많다.",ep:"전문가가 종목을 골라 투자해도, 장기적으로는 그냥 지수를 따라가는 것보다 성적이 못한 경우가 많다는 뜻이야."},
+  {c:2,t:"순자산총액(AUM)",d:"펀드·ETF가 굴리는 전체 자산 규모",ex:"해당 ETF의 AUM이 1조원을 넘어섰다.",ep:"이 ETF에 투자자들이 넣어둔 돈을 다 합치면 1조원이 넘는다는 뜻. 규모가 클수록 보통 안정적이라고 여겨져."},
+  {c:2,t:"총보수(TER)",d:"매년 부담하는 운용 비용 비율",ex:"총보수가 낮은 ETF일수록 장기 수익률에서 유리하다.",ep:"매년 떼어가는 수수료가 적을수록, 오래 투자했을 때 내 손에 남는 돈이 더 많아진다는 뜻이야."},
+  {c:2,t:"분배금/배당금",d:"보유 대가로 정기적으로 받는 현금",ex:"이 ETF는 매달 분배금을 지급하는 월배당 상품이다.",ep:"이 ETF를 갖고 있으면 매달 현금을 조금씩 받을 수 있다는 뜻이야."},
+  {c:2,t:"리츠(REITs)",d:"여러 투자자 돈을 모아 부동산에 투자, 임대수익 등을 배당",ex:"금리 인하 기대감에 리츠 관련 종목들이 강세를 보였다.",ep:"금리가 내려갈 것 같으니까, 부동산에 투자해서 임대료로 배당하는 상품들 주가가 올랐다는 뜻이야. 금리 내리면 대출 부담이 줄어서 부동산 관련 투자가 유리해지는 경우가 많아."},
+  {c:2,t:"채권",d:"정부·기업이 발행하는 차용증서, 만기에 원금+이자 지급",ex:"금리가 오르면 기존 채권 가격은 떨어지는 경향이 있다.",ep:"금리가 오르면 새로 나오는 채권이 더 높은 이자를 주니까, 예전에 낮은 이자로 발행된 채권은 인기가 떨어져서 가격이 낮아진다는 뜻이야."},
+  {c:2,t:"예금 vs 적금",d:"목돈 한 번에 맡기기 vs 매달 나눠 넣기",ex:"목돈이 있다면 예금, 매달 모으고 싶다면 적금이 적합하다.",ep:"이미 모아둔 돈을 굴리고 싶으면 예금, 매달 조금씩 모아가고 싶으면 적금이 더 맞는 방식이라는 뜻이야."},
+  {c:2,t:"MMF",d:"만기 짧은 안전자산에 투자해 수시입출금처럼 활용",ex:"단기 자금을 굴리기 위해 MMF로 자금이 몰리고 있다.",ep:"잠깐 넣어뒀다가 금방 뺄 돈을 그냥 두기 아까워서, MMF에 넣어 잠깐이라도 이자를 받으려는 돈이 몰리고 있다는 뜻이야."},
+  {c:2,t:"ELS",d:"특정 지수·종목 움직임에 따라 수익이 결정되는 파생결합증권",ex:"ELS는 조건 충족 시 약정 수익을 지급하지만 원금 손실 가능성도 있다.",ep:"미리 정한 조건(지수가 특정 범위 안에 있는 등)을 만족하면 약속된 수익을 주지만, 조건을 벗어나면 원금을 잃을 수도 있다는 뜻이야."},
+  {c:2,t:"커버드콜",d:"보유주식에 콜옵션을 매도해 옵션료 수익을 추가로 얻는 전략",ex:"커버드콜 ETF는 횡보장에서 안정적인 분배금 수익을 노릴 수 있다.",ep:"주가가 크게 안 움직이는 장세에서, 옵션을 팔아서 얻는 프리미엄으로 꾸준한 분배금을 만들어낼 수 있다는 뜻이야. 대신 주가가 크게 오를 땐 그 상승분을 다 못 챙길 수 있어."},
+
+  {c:3,t:"코스피",d:"유가증권시장 대표 주가지수",ex:"코스피가 사흘 만에 반등하며 2,700선을 회복했다.",ep:"3일 연속 떨어지던 코스피 지수가 다시 올라서 2,700이라는 지점을 다시 넘어섰다는 뜻이야."},
+  {c:3,t:"코스닥",d:"중소·벤처기업 중심 시장 및 지수",ex:"코스닥은 반도체 관련주 강세에 힘입어 상승 마감했다.",ep:"반도체 관련 회사 주가들이 잘 나가면서, 코스닥 지수 전체도 오른 채로 장을 마쳤다는 뜻이야."},
+  {c:3,t:"PER",d:"주가÷주당순이익, 이익 대비 주가 수준",ex:"이 종목의 PER은 업종 평균보다 낮아 저평가됐다는 분석이 나온다.",ep:"이 회사가 버는 돈에 비해 주가가 같은 업종 다른 회사들보다 싸게 거래되고 있다는 뜻이야."},
+  {c:3,t:"PBR",d:"주가÷주당순자산, 자산 대비 주가 수준",ex:"PBR이 1배 미만이면 장부가치보다 주가가 낮다는 뜻이다.",ep:"회사가 갖고 있는 자산가치보다도 시장에서 매겨진 주가가 더 낮다는 뜻이야."},
+  {c:3,t:"배당수익률",d:"주가 대비 연간 배당금 비율",ex:"배당수익률 4% 넘는 고배당주에 관심이 몰리고 있다.",ep:"주가 대비 1년에 배당금으로 4% 넘게 돌려주는 주식들에 사람들이 관심을 갖고 있다는 뜻이야."},
+  {c:3,t:"서킷브레이커",d:"주가 급락 시 시장 전체 거래를 일시 중단",ex:"코스피가 급락하며 서킷브레이커가 발동됐다.",ep:"주가가 너무 갑자기 많이 떨어져서, 시장 전체 거래를 잠깐 멈춰 세운 상황이라는 뜻이야."},
+  {c:3,t:"사이드카",d:"선물시장 급변 시 프로그램 매매 효과를 일시 제한",ex:"선물가격 급락에 사이드카가 발동됐다.",ep:"선물 가격이 갑자기 크게 떨어지면서, 그 여파가 현물 시장으로 급하게 번지지 않도록 일부 매매를 잠깐 제한했다는 뜻이야."},
+  {c:3,t:"시가총액",d:"상장주식수×주가, 기업 전체 시장가치",ex:"시가총액 기준 국내 1위 기업 자리를 지켰다.",ep:"발행된 주식 수에 주가를 곱한 값(회사 전체 가치)이 국내에서 제일 크다는 자리를 유지했다는 뜻이야."},
+  {c:3,t:"거래량",d:"일정 기간 사고 팔린 주식 수량",ex:"거래량이 평소보다 급증하며 투자자 관심이 쏠렸다.",ep:"평소보다 훨씬 많은 사람이 그 주식을 사고팔았다는 뜻이야. 보통 뭔가 이슈가 생겼을 때 이런 현상이 나타나."},
+  {c:3,t:"변동성",d:"가격이 오르내리는 정도",ex:"글로벌 불확실성이 커지며 증시 변동성이 확대되고 있다.",ep:"세계 경제 상황이 불안해지면서, 주가가 하루하루 크게 출렁이고 있다는 뜻이야."},
+
+  {c:4,t:"GDP",d:"일정 기간 생산된 재화·서비스의 총 가치",ex:"올해 GDP 성장률이 2%대 초반에 그칠 것으로 전망됐다.",ep:"나라 전체가 만들어낸 경제적 가치가 작년보다 2% 조금 넘게밖에 안 늘어날 것 같다는 뜻이야. 경제 성장 속도가 그렇게 빠르지 않다는 의미."},
+  {c:4,t:"경상수지",d:"상품·서비스·배당·이자 등을 포함한 종합 수지",ex:"경상수지가 석 달 연속 흑자를 기록했다.",ep:"우리나라가 외국과 거래(수출입, 이자, 배당 등 포함)해서 번 돈이 쓴 돈보다 많은 상태가 3개월째 이어지고 있다는 뜻이야."},
+  {c:4,t:"무역수지",d:"수출액-수입액",ex:"반도체 수출 호조에 힘입어 무역수지가 흑자로 전환됐다.",ep:"반도체를 많이 팔면서, 수출한 금액이 수입한 금액보다 많아졌다는 뜻이야."},
+  {c:4,t:"실업률",d:"경제활동인구 중 일자리 못 구한 비율",ex:"실업률이 전월보다 소폭 상승했다.",ep:"일하고 싶어도 일자리를 못 구한 사람 비율이 지난달보다 조금 늘었다는 뜻이야."},
+  {c:4,t:"CPI(소비자물가지수)",d:"가계 소비 상품·서비스 가격 변동 지표",ex:"소비자물가지수가 전년 동월 대비 3.1% 올랐다.",ep:"우리가 평소에 사는 물건·서비스 가격이 작년 같은 달보다 평균 3.1% 비싸졌다는 뜻이야."},
+  {c:4,t:"근원물가",d:"식료품·에너지 제외한 물가지수",ex:"근원물가 상승률이 목표치를 웃돌며 고민이 깊어지고 있다.",ep:"기름값이나 농산물처럼 자주 출렁이는 항목을 뺀 '진짜 기초체력' 물가마저 목표치보다 많이 오르고 있다는 뜻이야."},
+  {c:4,t:"양적완화",d:"중앙은행이 국채 등을 매입해 돈을 직접 공급",ex:"경기 부양을 위해 중앙은행이 양적완화 카드를 다시 꺼내들었다.",ep:"금리를 내리는 걸로 부족하니까, 중앙은행이 직접 시중에 돈을 풀어서 경기를 살리려 한다는 뜻이야."},
+  {c:4,t:"디폴트",d:"빌린 돈을 약속대로 갚지 못하는 상태",ex:"해당 국가가 국채 디폴트 위기에 놓였다는 우려가 커지고 있다.",ep:"그 나라가 빌린 돈(국채)을 약속한 대로 못 갚을 수도 있다는 걱정이 커지고 있다는 뜻이야."},
+  {c:4,t:"신용등급",d:"빚을 갚을 수 있는 능력에 대한 평가 등급",ex:"신용평가사가 해당 기업 신용등급을 한 단계 하향 조정했다.",ep:"그 회사가 빚을 갚을 능력이 예전보다 떨어졌다고 평가기관이 판단해서, 등급을 한 단계 낮췄다는 뜻이야."},
+  {c:4,t:"환헤지",d:"환율 변동 손실 위험을 줄이는 거래",ex:"환헤지형 ETF는 환율 변동 영향을 최소화하도록 설계됐다.",ep:"해외에 투자했는데 환율이 오르내려도 그 영향을 최대한 안 받도록 설계된 상품이라는 뜻이야."}
+];
+
+let activeCat = "all";
+
+function renderFilters(){
+  const el = document.getElementById("filters");
+  const chips = [["all","전체"]].concat(CATEGORIES.map((c,i)=>[i,c]));
+  el.innerHTML = chips.map(([val,label])=>
+    `<button class="chip${activeCat==val?' active':''}" data-cat="${val}">${label}</button>`
+  ).join("");
+  el.querySelectorAll(".chip").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      activeCat = btn.dataset.cat === "all" ? "all" : Number(btn.dataset.cat);
+      renderFilters();
+      renderCards();
+    });
+  });
+}
+
+function renderCards(){
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const main = document.getElementById("main");
+  main.innerHTML = "";
+
+  let anyMatch = false;
+
+  CATEGORIES.forEach((catName, ci)=>{
+    if(activeCat !== "all" && activeCat !== ci) return;
+
+    const items = TERMS.filter(t=>{
+      if(t.c !== ci) return false;
+      if(!q) return true;
+      return t.t.toLowerCase().includes(q) || t.d.toLowerCase().includes(q) || t.ep.toLowerCase().includes(q);
+    });
+
+    if(items.length === 0) return;
+    anyMatch = true;
+
+    const section = document.createElement("section");
+    section.className = "cat-section";
+    section.innerHTML = `
+      <h2>${catName}</h2>
+      <div class="count">${items.length}개 용어</div>
+      <div class="grid">
+        ${items.map(t=>`
+          <div class="card cat-${ci}">
+            <p class="term">${t.t}</p>
+            <p class="def">${t.d}</p>
+            <div class="news-clip">
+              <span class="tag">뉴스에선 이렇게</span>
+              <span class="quote">"${t.ex}"</span>
+            </div>
+            <details class="explain-wrap">
+              <summary class="explain-summary">
+                <span class="tag">쉬운 풀이</span>
+                <span class="hint">탭해서 보기</span>
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="explain-body">${t.ep}</div>
+            </details>
+          </div>
+        `).join("")}
+      </div>
+    `;
+    main.appendChild(section);
+  });
+
+  if(!anyMatch){
+    main.innerHTML = `
+      <div class="empty">
+        <p class="headline">앗, 아직 이 자료엔 없는 용어인가 봐요 😅</p>
+        <p>기초용어는 계속 채워가고 있어요. 궁금한 용어를 댓글이나 DM으로 남겨주시면 다음 업데이트에 추가할게요! 📝</p>
+        <a href="https://www.instagram.com/taengstar_/" target="_blank" rel="noopener">@taengstar_ 에 요청하기</a>
+      </div>
+    `;
+  }
+}
+
+document.getElementById("searchInput").addEventListener("input", renderCards);
+
+renderFilters();
+renderCards();
+</script>
+
+</body>
+</html>
